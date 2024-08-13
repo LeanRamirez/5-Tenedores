@@ -7,7 +7,7 @@ import Toast from 'react-native-toast-message'
 import { initialValues, validationSchema } from "./ChangeDisplayNameForm.data"
 import { style } from "./ChangeDisplayNameForm.styles"
 
-export function ChangeDisplayNameForm({ onClose }) {
+export function ChangeDisplayNameForm({ onClose, onReload }) {
 
     const formik = useFormik({
         initialValues: initialValues(),
@@ -19,6 +19,7 @@ export function ChangeDisplayNameForm({ onClose }) {
                 const currentUser = getAuth().currentUser
                 await updateProfile(currentUser, { displayName })
 
+                onReload();
                 onClose();
             } catch (error) {
                 Toast.show({
