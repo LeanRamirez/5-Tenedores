@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
 import { Input } from 'react-native-elements'
+import { MapForm } from "../MapForm"
 import { style } from "./InfoForm.styles"
 
 
 export function InfoForm({ formik }) {
-    return (
+    const [showMap, setShowMap] = useState(false)
+
+    const onOpenCloseMap = () => setShowMap(prevState => !prevState)
+    return (<>
         <View style={style.content}>
+
             <Input
                 placeholder='Nombre del restaurante'
                 onChangeText={(text) => formik.setFieldValue("name", text)}
@@ -14,6 +19,12 @@ export function InfoForm({ formik }) {
             />
             <Input
                 placeholder='Dirección'
+                rightIcon={{
+                    type: "material-community",
+                    name: "map-marker-radius",
+                    color: "#c2c2c2",
+                    onPress: onOpenCloseMap,
+                }}
                 onChangeText={(text) => formik.setFieldValue("addres", text)}
                 errorMessage={formik.errors.addres}
             />
@@ -35,5 +46,7 @@ export function InfoForm({ formik }) {
                 errorMessage={formik.errors.description}
             />
         </View>
+        <MapForm show={showMap} close={onOpenCloseMap} />
+    </>
     )
 }
