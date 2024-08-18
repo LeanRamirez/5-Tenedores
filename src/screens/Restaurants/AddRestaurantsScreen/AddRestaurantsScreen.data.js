@@ -8,6 +8,7 @@ export function initialValue() {
         email: "",
         description: "",
         location: null,
+        images: []
     }
 };
 
@@ -18,6 +19,7 @@ export function validationSchema() {
         phone: Yup.string().required("Este campo es obligatorio"),
         email: Yup.string().email("No es un email valido").required("Este campo es obligatorio"),
         description: Yup.string().required("Este campo es obligatorio"),
-        location: Yup.object().required("La localización es requerida")
+        location: Yup.object().required("La localización es requerida"),
+        images: Yup.array().min(1, "Se requiere una imagen como minimo").required("La imagen es requerida")
     })
 }
