@@ -2,6 +2,7 @@ const restaurantStack = {
     tab: "RestaurantsTab",
     restaurantes: "Restaurantes",
     addRestaurant: "AddRestaurant",
+    restaurant: "Restaurant",
 }
 
 const accountStack = {

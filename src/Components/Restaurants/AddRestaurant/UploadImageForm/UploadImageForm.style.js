@@ -19,5 +19,10 @@ export const style = StyleSheet.create({
         color: "#ff0000",
         fontSize: 12,
         paddingLeft: 6
+    },
+    imgStyle: {
+        width: 70,
+        height: 70,
+        marginRight: 10,
     }
 });

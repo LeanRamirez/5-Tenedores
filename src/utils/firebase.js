@@ -1,16 +1,18 @@
 
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyD6jBiP2un2pwj68HLnJ9ziVq_6zsG3EjE",
-    authDomain: "tenedores-24966.firebaseapp.com",
-    projectId: "tenedores-24966",
-    storageBucket: "tenedores-24966.appspot.com",
-    messagingSenderId: "31628227386",
-    appId: "1:31628227386:web:33bfc1a5397a06a4c25603"
+    apiKey: "AIzaSyAU4rxqpXrMPu2FPvEu-6dohvOAThz5Xj4",
+    authDomain: "tenedores-v3-1ffd4.firebaseapp.com",
+    projectId: "tenedores-v3-1ffd4",
+    storageBucket: "tenedores-v3-1ffd4.appspot.com",
+    messagingSenderId: "1010632159186",
+    appId: "1:1010632159186:web:599afd96817b088090a20b"
 };
 
-// Initialize Firebase
+
 export const initFirebase = initializeApp(firebaseConfig);
+
+export const db = getFirestore(initFirebase);

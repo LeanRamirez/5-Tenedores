@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, Alert } from 'react-native'
+import { ScrollView, Alert } from 'react-native'
 import { Icon, Avatar, Text } from "react-native-elements"
 import * as ImagePicker from "expo-image-picker"
 import { v4 as uuid } from 'uuid';
+import { map, filter } from "lodash"
 import { LoadingModal } from "../../../Shared"
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { style } from "./UploadImageForm.style"
@@ -45,11 +46,32 @@ export function UploadImageForm({ formik }) {
 
         formik.setFieldValue("images", [...formik.values.images, imageUrl]);
         setIsLoading(false);
-    }
+    };
+
+    const removeImage = (img) => {
+        Alert.alert(
+            "Eliminar imagen",
+            "¿Esta seguro que desea borrar la imagen?",
+            [
+                {
+                    text: "Cancelar",
+                    style: "cancel"
+                },
+                {
+                    text: "Confirmar",
+                    onPress: () => {
+                        const result = filter(formik.values.images, (image) => image !== img)
+                        formik.setFieldValue("images", result)
+                    }
+                },
+            ],
+            { cancelable: false }
+        )
+    };
 
     return (
         <>
-            <View style={style.viewImage}>
+            <ScrollView style={style.viewImage} horizontal showsHorizontalScrollIndicator={false}>
                 <Icon
                     type="material-community"
                     name="camera"
@@ -58,7 +80,16 @@ export function UploadImageForm({ formik }) {
                     onPress={openGallery}
                 />
 
-            </View>
+                {map(formik.values.images, (image) => (
+                    <Avatar
+                        key={image}
+                        source={{ uri: image }}
+                        containerStyle={style.imgStyle}
+                        onPress={() => removeImage(image)}
+                    />
+                ))}
+
+            </ScrollView>
             <Text style={style.error}>{formik.errors.images}</Text>
 
             <LoadingModal show={IsLoading} text="Cargando imagen" />
