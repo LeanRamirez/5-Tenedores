@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { ScrollView, Dimensions } from 'react-native'
-import { doc, onSnapshot, collection, query, where, orderBy } from "firebase/firestore"
+import { doc, onSnapshot } from "firebase/firestore"
 import { Carrusel, Loading } from "../../../Components/Shared"
-import { Header, Info } from "../../../Components/Restaurant"
+import { Header, Info, BtnReviewForm, Reviews, BtnFavorite } from "../../../Components/Restaurant"
 import { db } from "../../../utils"
 import { style } from "./RestaurantScreen.styles"
 
@@ -26,9 +26,12 @@ export function RestaurantScreen({ route }) {
     return (
         <ScrollView style={style.content}>
             <Carrusel images={restaurant.images} height={250} width={width} />
-
             <Header restaurant={restaurant} />
             <Info restaurant={restaurant} />
+            <BtnReviewForm idRestaurant={restaurant.id} />
+            <Reviews idRestaurant={restaurant.id} />
+            <BtnFavorite idRestaurant={restaurant.id} />
         </ScrollView>
     )
 }
+
